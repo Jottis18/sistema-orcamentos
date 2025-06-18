@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // URL base da API - em desenvolvimento usa proxy, em produção usa Railway
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://seu-projeto.railway.app' // SUBSTITUA pela URL do seu Railway
+  ? 'https://sistema-orcamentos-production-27eb.up.railway.app'
   : '';
 
 // Criar instância do axios com configuração base
