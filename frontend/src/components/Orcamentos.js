@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../config/axios';
 import { Trash2, Eye, FileText } from 'lucide-react';
 
 const Orcamentos = () => {
@@ -14,7 +14,7 @@ const Orcamentos = () => {
 
   const fetchOrcamentos = async () => {
     try {
-      const response = await axios.get('/api/orcamentos');
+      const response = await api.get('/api/orcamentos');
       setOrcamentos(response.data);
     } catch (error) {
       showAlert('Erro ao carregar orçamentos', 'danger');
@@ -29,7 +29,7 @@ const Orcamentos = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este orçamento?')) {
       try {
-        await axios.delete(`/api/orcamentos/${id}`);
+        await api.delete(`/api/orcamentos/${id}`);
         showAlert('Orçamento excluído com sucesso!', 'success');
         fetchOrcamentos();
       } catch (error) {
@@ -40,7 +40,7 @@ const Orcamentos = () => {
 
   const handleView = async (id) => {
     try {
-      const response = await axios.get(`/api/orcamentos/${id}`);
+      const response = await api.get(`/api/orcamentos/${id}`);
       setSelectedOrcamento(response.data);
       setShowModal(true);
     } catch (error) {

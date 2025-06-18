@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../config/axios';
 import { Plus, Trash2, Save, User, FileText } from 'lucide-react';
 
 const NovoOrcamento = () => {
@@ -17,7 +17,7 @@ const NovoOrcamento = () => {
 
   const fetchProdutos = async () => {
     try {
-      const response = await axios.get('/api/produtos');
+      const response = await api.get('/api/produtos');
       setProdutos(response.data);
     } catch (error) {
       showAlert('Erro ao carregar produtos', 'danger');
@@ -111,7 +111,7 @@ const NovoOrcamento = () => {
         }))
       };
 
-      await axios.post('/api/orcamentos', orcamentoData);
+      await api.post('/api/orcamentos', orcamentoData);
       showAlert('Orçamento criado com sucesso!', 'success');
       
       // Limpar formulário

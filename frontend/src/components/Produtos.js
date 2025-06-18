@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../config/axios';
 import { Plus, Edit, Trash2, X, Save } from 'lucide-react';
 
 const Produtos = () => {
@@ -19,7 +19,7 @@ const Produtos = () => {
 
   const fetchProdutos = async () => {
     try {
-      const response = await axios.get('/api/produtos');
+      const response = await api.get('/api/produtos');
       setProdutos(response.data);
     } catch (error) {
       showAlert('Erro ao carregar produtos', 'danger');
@@ -36,10 +36,10 @@ const Produtos = () => {
     
     try {
       if (editingProduto) {
-        await axios.put(`/api/produtos/${editingProduto.id}`, formData);
+        await api.put(`/api/produtos/${editingProduto.id}`, formData);
         showAlert('Produto atualizado com sucesso!', 'success');
       } else {
-        await axios.post('/api/produtos', formData);
+        await api.post('/api/produtos', formData);
         showAlert('Produto cadastrado com sucesso!', 'success');
       }
       
@@ -65,7 +65,7 @@ const Produtos = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este produto?')) {
       try {
-        await axios.delete(`/api/produtos/${id}`);
+        await api.delete(`/api/produtos/${id}`);
         showAlert('Produto excluído com sucesso!', 'success');
         fetchProdutos();
       } catch (error) {
